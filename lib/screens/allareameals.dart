@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import 'package:demoapplication_deep/model/mealmodel.dart';
 import 'package:demoapplication_deep/screens/mealdetail_screen.dart';
@@ -44,7 +43,7 @@ class _AllAreaMealsScreenState extends State<AllAreaMealsScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Expanded(
@@ -81,7 +80,7 @@ class _AllAreaMealsScreenState extends State<AllAreaMealsScreen> {
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return Divider(
+                  return const Divider(
                     height: 1,
                     color: Colors.grey,
                   );

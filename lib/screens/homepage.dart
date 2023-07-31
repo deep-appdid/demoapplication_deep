@@ -3,7 +3,6 @@ import 'package:demoapplication_deep/model/slider.dart';
 import 'package:demoapplication_deep/screens/allmeals.dart';
 import 'package:demoapplication_deep/screens/login_screen.dart';
 import 'package:demoapplication_deep/screens/navdrawer.dart';
-import 'package:demoapplication_deep/screens/randommeal_screen.dart';
 import 'package:demoapplication_deep/screens/search_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -49,7 +49,7 @@ class _RandomMealScreenState extends State<RandomMealScreen> {
         child: RefreshIndicator(
           onRefresh: _onRefresh,
           child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,11 +60,11 @@ class _RandomMealScreenState extends State<RandomMealScreen> {
                     width: double.infinity,
                     child: Image.network(mealDetail!.strMealThumb!),
                   ),
-                Divider(),
+                const Divider(),
                 Text("Meal Name: ${mealDetail?.strMeal ?? ''}"),
-                Divider(),
+                const Divider(),
                 Text("Category: ${mealDetail?.strCategory ?? ''}"),
-                Divider(),
+                const Divider(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(

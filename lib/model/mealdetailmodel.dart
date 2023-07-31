@@ -62,10 +62,10 @@ class Meal {
   String? strMeasure18;
   String? strMeasure19;
   String? strMeasure20;
-  dynamic? strSource;
-  dynamic? strImageSource;
-  dynamic? strCreativeCommonsConfirmed;
-  dynamic? dateModified;
+  dynamic strSource;
+  dynamic strImageSource;
+  dynamic strCreativeCommonsConfirmed;
+  dynamic dateModified;
 
   Meal({
     this.idMeal,
