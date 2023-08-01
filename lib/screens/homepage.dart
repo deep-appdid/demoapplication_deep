@@ -4,6 +4,7 @@ import 'package:demoapplication_deep/screens/allmeals.dart';
 import 'package:demoapplication_deep/screens/login_screen.dart';
 import 'package:demoapplication_deep/screens/navdrawer.dart';
 import 'package:demoapplication_deep/screens/search_screen.dart';
+import 'package:demoapplication_deep/screens/wishlist.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -83,6 +84,12 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
         actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WishListScreen()));
+              },
+              icon: Icon(Icons.favorite)),
           IconButton(
               onPressed: () async {
                 final FirebaseAuth _auth = FirebaseAuth.instance;
