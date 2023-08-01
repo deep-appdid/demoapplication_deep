@@ -29,7 +29,7 @@ class WishlistDatabase {
           $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
           $columnTitle TEXT,
           $columnImage TEXT,
-          $columnMealId REAL
+          $columnMealId TEXT
         )
         ''');
       },

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:demoapplication_deep/databases/wishlist_database.dart';
 import 'package:demoapplication_deep/model/mealdetailmodel.dart';
 import 'package:demoapplication_deep/model/mealmodel.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class MealDetailScreen extends StatefulWidget {
 
 class _MealDetailScreenState extends State<MealDetailScreen> {
   Future<Meal?>? _mealDetailFuture;
+  bool isFavorite = false; // Track the favorite status
+  Meal? mealDetail; // Move mealDetail to class level
 
   @override
   void initState() {
@@ -38,6 +41,43 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
     }
   }
 
+  void toggleFavorite(Meal mealDetail) async {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+
+    if (isFavorite) {
+      try {
+        await WishlistDatabase.addToWishlist(
+          title: mealDetail.strMeal.toString(), // Corrected title
+          image: mealDetail.strMealThumb.toString(), // Corrected image
+          mealid: '',
+        );
+        print("Added to wishlist");
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Added to wishlist'),
+          ),
+        );
+      } catch (e) {
+        print("Failed to add to wishlist: $e");
+      }
+    } else {
+      try {
+        await WishlistDatabase.removeFromWishlist(
+            mealDetail.strMeal.toString());
+        print("Removed from wishlist");
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Removed from wishlist'),
+          ),
+        );
+      } catch (e) {
+        print("Failed to remove from wishlist: $e");
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +94,8 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError || snapshot.data == null) {
                   // Error state
-                  return const Center(child: Text("Failed to fetch meal details"));
+                  return const Center(
+                      child: Text("Failed to fetch meal details"));
                 } else {
                   // Success state
                   Meal? mealDetail = snapshot.data;
@@ -77,14 +118,18 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                               children: [
                                 IconButton(
                                   onPressed: () {
-                                    // Implement favorite button functionality here
+                                    toggleFavorite(mealDetail);
+                                    print("Favourite Tap");
                                   },
-                                  icon: const Icon(Icons.favorite_border),
+                                  icon: Icon(
+                                    isFavorite
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: Colors.red,
+                                  ),
                                 ),
                                 IconButton(
-                                  onPressed: () {
-                                    // Implement share button functionality here
-                                  },
+                                  onPressed: () {},
                                   icon: const Icon(Icons.share),
                                 ),
                               ],
