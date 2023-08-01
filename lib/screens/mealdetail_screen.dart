@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 class MealDetailScreen extends StatefulWidget {
   final MealAll meal;
 
+
   const MealDetailScreen({Key? key, required this.meal}) : super(key: key);
 
   @override

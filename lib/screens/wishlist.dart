@@ -65,53 +65,58 @@ class WishListScreenState extends State<WishListScreen> {
                     itemBuilder: (context, index) {
                       final getWishlistIndex = getwishlistData![index];
 
-                      return Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade100),
-                            color: Colors.white,
-                          ),
-                          child: Stack(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SizedBox(
-                                    height: 150,
-                                    width: 150,
-                                    child: Image.network(
+                      return InkWell(
+                        onTap: () {
+                          //   Navigator.push(context, MaterialPageRoute(builder: (c)))
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Container(
+                            height: 200,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade100),
+                              color: Colors.white,
+                            ),
+                            child: Stack(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    SizedBox(
+                                      height: 150,
+                                      width: 150,
+                                      child: Image.network(
+                                        getWishlistIndex[
+                                            WishlistDatabase.columnImage],
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                    Text(
                                       getWishlistIndex[
-                                          WishlistDatabase.columnImage],
-                                      fit: BoxFit.fill,
+                                          WishlistDatabase.columnTitle],
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                                Positioned(
+                                  top: 8,
+                                  right: 8,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      _showBottomSheet(getWishlistIndex);
+                                    },
+                                    child: const Icon(
+                                      Icons.more_vert,
+                                      color: Colors.red,
                                     ),
                                   ),
-                                  Text(
-                                    getWishlistIndex[
-                                        WishlistDatabase.columnTitle],
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                ],
-                              ),
-                              Positioned(
-                                top: 8,
-                                right: 8,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    _showBottomSheet(getWishlistIndex);
-                                  },
-                                  child: const Icon(
-                                    Icons.more_vert,
-                                    color: Colors.red,
-                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       );
