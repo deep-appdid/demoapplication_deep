@@ -51,10 +51,10 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   // Loading state
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError || snapshot.data == null) {
                   // Error state
-                  return Center(child: Text("Failed to fetch meal details"));
+                  return const Center(child: Text("Failed to fetch meal details"));
                 } else {
                   // Success state
                   Meal? mealDetail = snapshot.data;
@@ -62,19 +62,46 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 150,
-                        width: double.infinity,
-                        child: Image.network(mealDetail!.strMealThumb!),
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          SizedBox(
+                            height: 150,
+                            width: double.infinity,
+                            child: Image.network(mealDetail!.strMealThumb!),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    // Implement favorite button functionality here
+                                  },
+                                  icon: const Icon(Icons.favorite_border),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    // Implement share button functionality here
+                                  },
+                                  icon: const Icon(Icons.share),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      Divider(),
+                      const Divider(),
                       Text("Meal Name: ${mealDetail.strMeal ?? ''}"),
-                      Divider(),
+                      const Divider(),
                       Text("Category: ${mealDetail.strCategory ?? ''}"),
-                      Divider(),
+                      const Divider(),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text("Instructions: ${mealDetail.strInstructions ?? ''}", textAlign: TextAlign.start),
+                        child: Text(
+                            "Instructions: ${mealDetail.strInstructions ?? ''}",
+                            textAlign: TextAlign.start),
                       ),
                     ],
                   );
