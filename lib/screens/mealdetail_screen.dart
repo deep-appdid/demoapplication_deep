@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:demoapplication_deep/databases/wishlist_database.dart';
 import 'package:demoapplication_deep/model/mealdetailmodel.dart';
 import 'package:demoapplication_deep/model/mealmodel.dart';
+import 'package:demoapplication_deep/screens/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -81,7 +82,16 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WishListScreen()));
+              },
+              icon: Icon(Icons.favorite)),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
